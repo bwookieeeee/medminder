@@ -1,0 +1,42 @@
+.Dd Oct 06 2023
+.Dt medminder 1
+.Os Debian
+.Sh NAME
+.Nm medminder
+.Nd Determines when the next dose of a medication is due, and/or if it needs to be refilled.
+.Sh SYNOPSIS
+.Nm
+.Op Fl a, -add Ar dose Ar inventory Ar interval
+.Op Fl d, -delete
+.Op Fl l, -last
+.Op Fl n, -next
+.Op Fl r, -refill Ar newInventory
+.Op Fl t, -take
+.Ar name
+.Sh DESCRIPTION
+Helper program designed to get called over SSH from an iOS shortcut to help me with regulating doses of a medicine with a non-regular schedule.
+.Bl -tag -width -indent
+.It name
+Name of the medicine, i.e., Zoloft
+.It dose 
+Unit-less amount of medicine to take with each dose. You would insert 2 if you took two pills, or 10 if you took 10ccs, etc.
+.It inventory
+The total number of units you have remaining.
+.It interval
+How many days between doses. This is interpreted such that 1 day is every day.
+.El
+.Sh OPTIONS
+.Bl -tag -width -indent
+.It Fl a, -add Ar dose Ar inventory Ar interval
+Add a new medication using the supplied dose, inventory, and interval.
+.It Fl d, -delete
+Permanently delete a medicine.
+.It Fl l, -last
+Gets the date of the last dose.
+.It Fl n, -next
+Gets the date of the next dose.
+.It Fl r, -refill Ar newInventory
+Adds newInventory to the remaining inventory of the medicine. If remaining inventory is not tracked (stored as -1), add 1 to new inventory.
+.It Fl t, -take
+Updates the last taken time for the medicine and decrements the remaining inventory by the dose.
+.El
